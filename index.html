@@ -1,447 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>MCDO Group</title>
-<meta name="description" content="A playful, fan‑made McDo-themed landing page. Not affiliated with McDonald's.">
-<style>
-
-body {
-
-      margin: 0;
-
-      font-family: 'Segoe UI', sans-serif;
-
-      background-color: #f0f0f0;
-
-      color: #333;
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MCDO Group</title>
+  <meta name="description" content="A playful and vlog promotion fan-made McDo-themed page. Not affiliated with McDonald's.">
+  <style>
+    :root {
+      --mc-red:#d61f26;
+      --mc-red-ink:#b3161b;
+      --mc-yellow:#ffc300;
+      --mc-yellow-ink:#d4a100;
+      --text:#1a1a1a;
+      --muted:#666;
+      --surface:#fff6e6;
+      --card:#ffffff;
+      --ring:0 0 0 .12rem var(--mc-yellow);
+      --radius:14px;
+      --shadow:0 10px 30px rgba(0,0,0,.12), 0 3px 10px rgba(0,0,0,.06);
+      --spotify-green:#1db954;
     }
 
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;}
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      color:var(--text);
+      background: radial-gradient(82% 60% at 50% 0%, #fff5d9 0%, #fff 60%) fixed;
+    }
+
+    a {color:inherit;text-decoration:none;}
+    img {max-width:100%;display:block;}
+    .container {max-width:1120px;margin-inline:auto;padding:0 20px;}
+
+    /* ===== NAVBAR ===== */
+    .nav {
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:saturate(140%) blur(8px);
+      background:linear-gradient(180deg,rgba(255,255,255,.99),rgba(255,255,255,.75));
+    }
+    .nav__row {
+      display:flex;align-items:center;justify-content:space-between;
+      height:64px;gap:16px;
+    }
+    .brand {
+      display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px;
+    }
+    .brand__logo {
+      width:34px;height:34px;border-radius:9px;background:var(--mc-red);
+      display:grid;place-items:center;box-shadow:var(--shadow);position:relative;overflow:hidden;
+    }
+    .arches {width:22px;height:22px;display:block;position:relative;}
+    .arches::before {
+      content:"";position:absolute;
+      left:4px;top:3px;width:7px;height:18px;border-radius:8px 8px 2px 2px;
+      background:var(--mc-yellow);transform:skewX(-6deg);
+      box-shadow:10px 0 0 0 var(--mc-yellow);
+    }
+    .nav__links {display:flex;gap:18px;align-items:center;font-weight:600;}
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display:inline-flex;align-items:center;justify-content:center;gap:.5ch;
+      font-weight:700;padding:.8rem 1.1rem;border-radius:12px;border:none;cursor:pointer;
+      transition:transform .08s ease, box-shadow .18s ease, background .2s ease;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn--primary {
+      background:linear-gradient(180deg,var(--mc-red),var(--mc-red-ink));
+      color:white;box-shadow:0 6px 18px rgba(214,31,38,.35);
+    }
+    .btn--primary:hover{filter:brightness(1.05)}
+    .btn--ghost {background:transparent;border:2px solid rgba(0,0,0,.08)}
+
+    /* ===== SECTIONS ===== */
+    .section__title {margin:1.5rem 0;font-size:1.6rem;font-weight:700;}
 
     .slider-container {
-
-      max-width: 800px;
-
-      margin: 2rem auto;
-
-      overflow: hidden;
-
-      background: white;
-
-      border-radius: 10px;
-
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-
+      max-width:800px;margin:2rem auto;overflow:hidden;background:white;
+      border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,0.1);
     }
-
     .video-slider {
-
-      display: flex;
-
-      transition: transform 0.5s ease-in-out;
-
+      display:flex;transition:transform 0.5s ease-in-out;
     }
-
     .video-slide {
-
-      min-width: 100%;
-
-      box-sizing: border-box;
-
-      padding: 1rem;
-
+      min-width:100%;box-sizing:border-box;padding:1rem;
     }
+    video {width:100%;border-radius:8px;}
+    .nav-buttons {text-align:center;margin:1rem 0;}
+    .nav-buttons button {margin:0 .5rem;padding:.5rem 1rem;}
 
-    video {
-
-      width: 100%;
-
-      height: 100%;
-
-      border-radius: 8px;
-
+    .build {
+      display:grid;gap:12px;background:var(--surface);
+      border:1px solid rgba(0,0,0,.06);border-radius:20px;padding:16px;
     }
-
-      
-
-    
-
-    
-
-    .nav-buttons {
-
-      text-align: center;
-
-      margin: 1rem 0;
-
+    footer {
+      margin-top:40px;border-top:1px solid rgba(0,0,0,.06);
+      padding:24px 0 60px;color:var(--muted);
     }
+    .footgrid {display:grid;gap:16px;}
 
-    .nav-buttons button:hover {
-
-      background-color: #555;
-
+    /* MUSIC PLAYER */
+    .music-player {
+      max-width:350px;margin:2rem auto;padding:20px;text-align:center;
+      background:#181818;color:#fff;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.3);
     }
-
-  :root{
-
-    --mc-red:#d61f26;
-
-    --mc-red-ink:#b3161b;
-
-    --mc-yellow:#ffc300;
-
-    --mc-yellow-ink:#d4a100;
-
-    --text:#1a1a1a;
-
-    --muted:#666;
-
-    --surface:#fff6e6;
-
-    --card:#ffffff;
-
-    --ring: 0 0 0 .12rem var(--mc-yellow);
-
-    --radius:14px;
-
-    --shadow:0 10px 30px rgba(0,0,0,.12), 0 3px 10px rgba(0,0,0,.06);
-
-  }
-
-  *{box-sizing:border-box}
-
-  html,body{height:100%;}
-
-  body{
-
-    margin:0;
-
-    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-
-    color:var(--text);
-
-    background:
-
-      radial-gradient(82% 60% at 50% 0%, #fff5d9 0%, #fff 60%) fixed;
-
-  }
-
-  a{color:inherit;text-decoration:none}
-
-  img{max-width:100%;display:block}
-
-  .container{max-width:1120px;margin-inline:auto;padding:0 20px}
-
-  /* ===== NAVBAR ===== */
-
-  .nav{
-
-    position:sticky;top:0;z-index:50;
-
-    backdrop-filter: saturate(140%) blur(8px);
-
-    background:linear-gradient(180deg, rgba(255,255,255,.99), rgba(255,255,255,.75));
-
-  }
-
-    .nav__row{
-
-    display:flex;align-items:center;justify-content:space-between;
-
-    height:64px;gap:16px
-
+    .music-player img {
+      width:100%;border-radius:12px;margin-bottom:10px;
     }
-
-  .brand{
-
-    display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px
-
-  }
-
-  .brand__logo{
-
-    width:34px;height:34px;border-radius:9px;background:var(--mc-red);
-
-    display:grid;place-items:center;box-shadow:var(--shadow);position:relative;overflow:hidden;
-
-  }
-
-  .arches{
-
-    width:22px;height:22px;display:block;
-
-  }
-
-  /* logos */
-
-  .arches::before, .arches::after{
-
-    content:"";position:absolute;inset:auto;
-
-  }
-
-   .arches{position:relative}
-
-  .arches::before{
-
-    left:4px;top:3px;width:7px;height:18px;border-radius:8px 8px 2px 2px;
-
-    background:var(--mc-yellow); transform:skewX(-6deg);
-
-    box-shadow:10px 0 0 0 var(--mc-yellow);
-
-  }
-
-  .nav__links{
-
-    display:flex;gap:18px;align-items:center;font-weight:600
-
-  }
-
-  .btn{
-
-    display:inline-flex;align-items:center;justify-content:center;gap:.5ch;
-
-    font-weight:700; padding:.8rem 1.1rem;border-radius:12px;border:none;cursor:pointer;
-
-    transition:transform .08s ease, box-shadow .18s ease, background .2s ease;
-
-  }
-
-  .btn:active{transform:translateY(1px)}
-
-  .btn--primary{
-
-    background:linear-gradient(180deg, var(--mc-red), var(--mc-red-ink));
-
-    color:white; box-shadow:0 6px 18px rgba(214,31,38,.35);
-
-  }
-
-  .btn--primary:hover{filter:brightness(1.05)}
-
-  .btn--ghost{
-
-    background:transparent;border:2px solid rgba(0,0,0,.08)
-
-  }
-
-  .pill{
-
-    padding:.4rem .7rem;border-radius:999px;background:var(--surface);
-
-    border:1px dashed rgba(0,0,0,.08);font-size:.86rem;color:var(--muted)
-
-  }
-
- /* ===== RATINGS ===== */
-
-   .build{
-
-    display:grid;gap:12px;background:var(--surface);border:1px solid rgba(0,0,0,.06);
-
-    border-radius:20px;padding:16px
-
-  /* ===== FOOTER ===== */
-
-  ;footer{
-
-    margin-top:40px;border-top:1px solid rgba(0,0,0,.06);padding:24px 0 60px;color:var(--muted)
-
-  }
-
-  .footgrid{display:grid;gap:16px}
-
-  @media (min-width:840px){
-
-    .hero__grid{grid-template-columns:1.1fr .9fr}
-
-    .footgrid{grid-template-columns:2fr 1fr 1fr}
-
-  }
-</style>
+  </style>
 </head>
 <body>
-<!-- NAV -->
-<nav class="nav">
-<div class="container nav__row">
-<a class="brand" href="#">
-<span class="brand__logo" aria-hidden="true"><span class="arches"></span></span>
-<span>McDo<span style="color:var(--mc-red)">Group</span></span>
-</a>
-<div class="nav__links">
-<a href="#menu">videos</a>
-<a href="#deals">Ratings</a>
-<b>mawd 103</b>
-</div>
-</div>
-</nav>
-<br>
-<h1 class="headline">Triple Fun <span style="background:linear-gradient(90deg,var(--mc-yellow),#ffe27b);padding:0 .3rem;border-radius:8px"> <br>One</span>Channel<br></h1>
-<p class="subhead">Together, we turn simple days into unforgettable memories. Three creators, one journey, day life moments captured for you. Tune in and be part of our daily life growing.</p>
-<div class="cta">
-<a class="btn btn--primary ring" href="#menu">Watch videos</a>
-<a class="btn btn--ghost ring" href="#build" aria-describedby="builddesc">Feedbacks</a>
-<span id="builddesc" class="visually-hidden"></span>
-</div>
-</div>
+  <nav class="nav">
+    <div class="container nav__row">
+      <a class="brand" href="#">
+        <span class="brand__logo" aria-hidden="true"><span class="arches"></span></span>
+        <span>McDo<span style="color:var(--mc-red)">Group</span></span>
+      </a>
+      <div class="nav__links">
+        <a href="#menu">Videos</a>
+        <a href="#deals">Ratings</a>
+        <b>mawd 103</b>
+      </div>
+    </div>
+  </nav>
+  <header class="container">
+    <h1 class="headline" style="margin:2rem 0;">
+      Triple Fun 
+      <span style="background:linear-gradient(90deg,var(--mc-yellow),#ffe27b);padding:0 .3rem;border-radius:8px">
+        <br>One
+      </span>
+      Channel
+    </h1>
+    <p class="subhead">
+      Together, we turn simple days into unforgettable memories. Three creators, one journey, day life moments captured for you. Tune in and be part of our daily life growing.
+    </p>
+    <div class="cta" style="margin:1.5rem 0;">
+      <a class="btn btn--primary" href="#menu">Watch videos</a>
+      <a class="btn btn--ghost" href="#build">Feedbacks</a>
+    </div>
+  </header>
 
-</header>
-<!-- MENU -->
-<main class="container">
-<section id="menu" class="section">
-<div class="section__head">
-<h2 class="section__title"> Daily Vlog</h2>
-<div class="slider-container">
-<div class="video-slider" id="videoSlider">
-<div class="video-slide">
-<video autoplay muted controls>
-<source src="1757391157127_original-7369d3c7-a90f-4d8f-8ebc-c574d4a32c55.mp4" type="video/mp4" />
-</video>
-</div>
-<div class="video-slide">
-<video autoplay muted controls>
-<source src="1757390456673_original-924d47c6-e221-4842-b63b-b21a06346b5b.mp4" type="video/mp4" />
-</video>
-</div>
-<div class="video-slide">
-<video autoplay muted controls>
-<source src="1757391120252_original-fa858ef8-c050-48ad-ab5d-500e970b8e2b.mp4" type="video/mp4" />
-</video>
-</div>
-</div>
-<div class="nav-buttons">
-<button onclick="prevSlide()">⏪ Prev</button>
-<button onclick="nextSlide()">⏩ Next</button>
-</div>
-<script>
+  <main class="container">
 
+    <!-- VIDEOS -->
+    <section id="menu" class="section">
+      <h2 class="section__title">Daily Vlog</h2>
+      <div class="slider-container">
+        <div class="video-slider" id="videoSlider">
+          <div class="video-slide">
+            <video controls>
+              <source src="1757391157127_original-7369d3c7-a90f-4d8f-8ebc-c574d4a32c55.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-slide">
+            <video controls>
+              <source src="1757390456673_original-924d47c6-e221-4842-b63b-b21a06346b5b.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-slide">
+            <video controls>
+              <source src="1757391120252_original-fa858ef8-c050-48ad-ab5d-500e970b8e2b.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <button onclick="prevSlide()">⏪ Prev</button>
+        <button onclick="nextSlide()">⏩ Next</button>
+      </div>
+    </section>
+
+    <!-- RATINGS -->
+    <section id="deals" class="section">
+      <h2 class="section__title">Give Feedback</h2>
+      <div class="deal">
+        <a class="btn btn--primary" href="#build">Start giving feedback</a>
+      </div>
+    </section>
+
+    <section id="build" class="section">
+      <h2 class="section__title">Write Your Feedbacks</h2>
+      <div class="build" role="region" aria-label="ratings">
+        <form>
+          <label>Name<br>
+            <input type="text" name="name" style="width:100%;padding:.5rem;margin:.3rem 0;border:1px solid #ccc;border-radius:6px;" placeholder="Surname, First name, Middle">
+          </label><br>
+          <label>Email<br>
+            <input type="email" name="email" style="width:100%;padding:.5rem;margin:.3rem 0;border:1px solid #ccc;border-radius:6px;" placeholder="example@example.com">
+          </label><br>
+          <label>Rating<br>
+            <select name="rating" style="width:100%;padding:.5rem;margin:.3rem 0;border:1px solid #ccc;border-radius:6px;">
+              <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+              <option value="4">⭐⭐⭐⭐ Good</option>
+              <option value="3">⭐⭐⭐ Average</option>
+              <option value="2">⭐⭐ Poor</option>
+              <option value="1">⭐ Terrible</option>
+            </select>
+          </label><br>
+          <label>Feedback<br>
+            <textarea name="comment" rows="4" style="width:100%;padding:.5rem;margin:.3rem 0;border:1px solid #ccc;border-radius:6px;" placeholder="message"></textarea>
+          </label><br>
+          <button type="submit" style="background:#ff4c29;color:white;padding:.6rem 1rem;border:none;border-radius:6px;cursor:pointer;">Submit</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- MUSIC PLAYER -->
+    <section class="section">
+      <h2 class="section__title" align="center">Mcdo Music Playlist</h2>
+      <div class="music-player">
+        <img id="albumCover" src="IMG_1635.jpeg" alt="Album cover">
+        <h3 id="trackTitle">Burnout - (by SugarFree)</h3><br>
+        <audio controls>
+          <src="Burnout - 3D (Lyrics).mp3"></src>
+        </audio>
+
+      <div class="music-player">
+        <img id="albumCover" src="IMG_1634.jpeg" alt="Album cover">
+        <h3 id="trackTitle">Something About You -
+        (by eyedress) </h3><br>
+        <audio controls>
+          <src="Eyedress & Dent May - Something About You 1.mp3"></src>
+        </audio>
+        <div class="music-player">
+        <img id="albumCover" src="IMG_1636.jpeg" alt="Album cover">
+        <h3 id="trackTitle">Get You - (by Kali Uchis)
+        (by eyedress) </h3><br>
+        <audio controls>
+          <src="Get You (feat. Kali Uchis).mp3"></src>
+        </audio>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footgrid">
+      <div>
+        <div class="brand" style="margin-bottom:8px">
+          <span class="brand__logo" aria-hidden="true"><span class="arches"></span></span>
+          <strong>McDoGroup</strong>
+        </div>
+        <p class="note">Triple fun, one channel—thanks for watching, and don’t forget to join us again!</p>
+      </div>
+      <div>
+        <strong>Members</strong>
+        <ul>
+          <li>Aira Garcia</li>
+          <li>Nicole Guizon</li>
+          <li>Kczeleen Mangaliman</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Video Slider -->
+  <script>
     let currentIndex = 0;
-
     const slider = document.getElementById('videoSlider');
-
     const totalSlides = slider.children.length;
 
     function updateSlider() {
-
       slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-
     }
-
     function nextSlide() {
-
       currentIndex = (currentIndex + 1) % totalSlides;
-
       updateSlider();
-
     }
-
     function prevSlide() {
-
       currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-
       updateSlider();
-
     }
-</script>
-
-</section>
-<section id="deals" class="section">
-<div class="deal">
-<div>
-<a class="btn" href="#build">start giving feedback</a>
-</div>
-</div>
-<div class="deal__art">
-<svg viewBox="0 0 220 160" aria-hidden="true">
-<circle cx="110" cy="80" r="70" fill="rgba(0,0,0,.15)"/>
-<rect x="40" y="70" width="140" height="34" rx="10" fill="var(--mc-yellow)"/>
-<rect x="65" y="38" width="90" height="30" rx="12" fill="#fff"/>
-<rect x="55" y="104" width="110" height="10" rx="6" fill="#fff"/>
-</svg>
-</div>
-</div>
-</section>
-<section id="build" class="section">
-<h2 class="section__title">WRITE YOUR FEEDBACKS</h2>
-<div class="build" role="region" aria-label="ratings">
-<section style="max-width:500px;margin:2rem auto;padding:1rem;background:#fff;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.1);">
-<h2 style="margin:0 0 .5rem;">Feedback & Rating</h2>
-<form>
-<label>Name<br>
-<input type="text" name="name" style="width:100%;padding:.5rem;margin:.3rem 0;border:1px solid #ccc;border-radius:6px;">
-</label>
-<br>
-<label>Email<br>
-<input type="email" name="email" style="width:100%;padding:.5rem;margin:.3rem 0;border:1px solid #ccc;border-radius:6px;">
-</label>
-<br>
-<label>Rating<br>
-<select name="rating" style="width:100%;padding:.5rem;margin:.3rem 0;border:1px solid #ccc;border-radius:6px;">
-<option value="5">⭐⭐⭐⭐⭐ Excellent</option>
-<option value="4">⭐⭐⭐⭐ Good</option>
-<option value="3">⭐⭐⭐ Average</option>
-<option value="2">⭐⭐ Poor</option>
-<option value="1">⭐ Terrible</option>
-</select>
-</label>
-<br>
-<label>Feedback<br>
-<textarea name="comment" rows="4" style="width:100%;padding:.5rem;margin:.3rem 0;border:1px solid #ccc;border-radius:6px;"></textarea>
-</label>
-<br>
-<button type="submit" style="background:#ff4c29;color:white;padding:.6rem 1rem;border:none;border-radius:6px;cursor:pointer;">Submit</button>
-</div>
-</form>
-</section>
-<div class="container">
-<div class="divider"></div>
-</div> <br>
-<!-- FOOTER -->
-<footer>
-<div class="container footgrid">
-<div>
-<div class="brand" style="margin-bottom:8px">
-<span class="brand__logo" aria-hidden="true"><span class="arches"></span></span>
-<strong>McDoGroup</strong>
-</div>
-<p class="note">Triple fun, one channel—thanks for watching, and don’t forget to join us again!</p>
-</div>
-<div>
-<strong>Members</strong>
-<ul>
-<li>Aira Garcia</li>
-<li>Nicole Guizon</li>
-<li>Kczeleen Mangaliman</li>
-<strong>FAVORITE MUSIC</strong>
-
-<div class="section">
-  <audio controls autoplay loop>
-    <source src="Burnout - 3D (Lyrics).mp3">
-    this browser does not support this audio element 
-  </audio>
-</div>
-
-<div class="section">
-  <audio controls autoplay loop>
-    <source src="Eyedress & Dent May - Something About You 1.mp3">
-    this browser does not support this audio element 
-  </audio>
-</div>
-
-<div class="section">
-  <audio controls autoplay loop>
-    <source src="Get You (feat. Kali Uchis).mp3">
-    this browser does not support this audio element 
-  </audio>
-</div>
-
-</ul>
-</div>
-</div>
-</footer>
+  </script>
 </body>
-
 </html>
